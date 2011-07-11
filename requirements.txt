@@ -1,0 +1,5 @@
+django>=1.3
+
+-e git+https://github.com/ask/celery.git#egg=celery # 2.3.0
+-e git+https://github.com/ask/django-celery.git#egg=django-celery # 2.3.0
+-e git+https://github.com/toastdriven/django-tastypie.git#egg=django-tastypie # 1.0.0beta

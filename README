@@ -1,0 +1,48 @@
+installing:
+    development:
+        install:
+            - virtualenv env --no-site-packages
+            - pip install -r requirements.txt
+            - python manage.py syncdb
+    
+        run:
+            - python manage.py runserver
+            - python manage.py celeryd -l info -E -n worker1.example.com -P gevent -c 1000
+            - python manage.py celerycam --frequency=3.0
+
+    tests:
+        install:
+            - sudo apt-get install postgresql
+            - sudo apt-get install libpq-dev
+            - change authentication to trust on postgres user and local connections
+            - sudo service postgresql restart
+            - createuser -U postgres tests
+            - psql -U postgres -c "alter user tests with PASSWORD 'tests';" 
+            - createdb -U tests rest_api
+            - virtualenv env --no-site-packages
+            - pip install -r requirements_tests.txt
+            - python manage.py syncdb --settings=settings_tests
+            #- python manage.py test rest_api --settings=settings_tests
+            - python manage.py run_gunicorn --workers=2 --settings=settings_tests
+
+    production:
+        - #ADD
+        - #ADD
+        - #ADD
+        - #ADD
+
+testing:
+    run:
+        - python manage.py test
+
+
+testing_load:
+    install:
+        - sudo easy_intall -U ez_setup
+        - sudo easy_intall -U funkload
+
+    run:
+        - cd rest_api/funk_loaf_tests
+        - fl-run-test test_name.py
+        - fl-run-bench test_name.py Name.test_name
+        - fl-build-report --html name-bench.xml 
