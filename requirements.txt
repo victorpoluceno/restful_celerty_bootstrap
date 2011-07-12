@@ -1,4 +1,5 @@
 django>=1.3
+requests>=0.5
 
 -e git+https://github.com/ask/celery.git#egg=celery # 2.3.0
 -e git+https://github.com/ask/django-celery.git#egg=django-celery # 2.3.0

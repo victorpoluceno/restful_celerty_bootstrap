@@ -11,6 +11,7 @@ from tastypie.models import ApiKey
 from rest_api.models import Url
 from rest_api.tasks import url_short, url_update, url_request, \
         UrlAlreadyUpdatedError
+from rest_api.backend import Request
 
 from celery.task.sets import subtask
 from celery.task import task
@@ -96,3 +97,19 @@ class SmokeTest(TestCase):
 
         self.assertNotEqual(data['key'], '')
         self.assertNotEqual(data['key'], None)
+
+
+class UrlShortnerTest(TestCase):
+    def test_request_sandbox(self):
+        request = Request()
+        key = request.create('http://hakta.com')
+        self.assertNotEqual(key, '')
+        self.assertNotEqual(key, None)
+        self.assertTrue('sandbox' in key)
+
+        from rest_api.url_shortner import Google
+        request = Request(backend=Google)
+        key = request.create('http://hakta.com')
+        self.assertNotEqual(key, '')
+        self.assertNotEqual(key, None)
+        self.assertTrue('goo.gl' in key)

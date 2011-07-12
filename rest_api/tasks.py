@@ -2,7 +2,7 @@ from celery.task import task
 from celery.task.sets import subtask
 
 from rest_api.models import Url
-from rest_api.url_shortner import Request, GoogleUrlShortner
+from rest_api.backend import Request
 
 #TODO: read long_url from memcache
 #TODO: ensure with retry that if we made a resquest we have to save the result 
@@ -28,7 +28,7 @@ def url_request(url_id, callback):
     logger.info("Requesting short url to: %s" % url)
 
     # request an url shortner for the given url
-    short_url = Request(GoogleUrlShortner).create(url.long_url)
+    short_url = Request().create(url.long_url)
     logger.info("Got response: %s" % short_url)
 
     # spawn a task to update url on db
