@@ -13,6 +13,22 @@ from rest_api.models import Url
 from rest_api.forms import UrlForm
 from rest_api.tasks import url_short
 
+from django.conf import settings
+
+
+class UrlThrottle(CacheThrottle):
+    def should_be_throttled(self, identifier, **kwargs):
+        try:
+            should_be_throttled = settings.SHOULD_BE_THROTTLED
+        except (AttributeError), e:
+            should_be_throttled = True
+
+        if super(UrlThrottle, self).should_be_throttled(identifier, **kwargs) \
+                and should_be_throttled:
+                return True
+
+        return False
+
 
 class UrlResource(ModelResource):
     class Meta:
@@ -21,7 +37,7 @@ class UrlResource(ModelResource):
         fields = ['long_url', 'key']
         authentication = ApiKeyAuthentication()
         authorization = DjangoAuthorization()
-        throttle = CacheThrottle(throttle_at=100)
+        throttle = UrlThrottle(throttle_at=100)
         allowed_methods = ['get', 'post']
         validation = FormValidation(form_class=UrlForm)
 

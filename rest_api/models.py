@@ -6,7 +6,7 @@ models.signals.post_save.connect(create_api_key, sender=User)
 
 
 class Url(models.Model):
-    long_url = models.CharField(max_length=250, unique=True)
+    long_url = models.CharField(max_length=250)#, unique=True) #FIXME
     key = models.CharField(max_length=250, blank=True)
 
     def __unicode__(self):

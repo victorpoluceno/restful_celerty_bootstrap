@@ -1,6 +1,9 @@
 # Django settings for mytest project.
 import os
 
+# avoid be throttled when running on test server
+SHOULD_BE_THROTTLED = False
+
 import djcelery
 djcelery.setup_loader()
 
@@ -11,19 +14,20 @@ BROKER_PASSWORD = "test"
 BROKER_VHOST = "vpoluceno-desktop"
 #BROKER_USE_SSL = True
 
-CELERY_SEND_TASK_ERROR_EMAILS = True
+#CELERY_SEND_TASK_ERROR_EMAILS = True
 #CELERY_RESULT_BACKEND = "cache"
 #CELERY_CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
-CELERYD_SOFT_TASK_TIME_LIMIT = 180
-CELERYD_POOL = "eventlet"
-CELERYD_CONCURRENCY = 10
+#CELERYD_SOFT_TASK_TIME_LIMIT = 180
+#CELERYD_POOL = "eventlet"
+#CELERYD_CONCURRENCY = 10
 
+# set CELERY_ALWAYS_EAGER=True before running tests
 TEST_RUNNER = 'djcelery.contrib.test_runner.run_tests' 
 
 PROJECT_DIR = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -123,7 +127,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

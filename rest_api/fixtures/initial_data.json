@@ -1,0 +1,56 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "vpoluceno", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2011-07-07 18:44:54", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$e9fc1$4f8ab5e8fea873a835de51f586d3aab515a24836", 
+            "email": "victorpoluceno@gmail.com", 
+            "date_joined": "2011-07-04 18:58:40"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "test", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": false, 
+            "last_login": "2011-07-04 19:46:23", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$67be5$e5bdca468023f23cc0189107599a5bae4953dacf", 
+            "email": "", 
+            "date_joined": "2011-07-04 19:46:23"
+        }
+    },
+    {
+        "pk": 1, 
+        "model": "tastypie.apikey", 
+        "fields": {
+            "user": 1, 
+            "key": "1274f847528c4c0136295036dba6022a5e118967", 
+            "created": "2011-07-04 18:58:40"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tastypie.apikey", 
+        "fields": {
+            "user": 2, 
+            "key": "1879ed2609d67897fc9ed1ec0b7323a5e98842b9", 
+            "created": "2011-07-04 19:46:23"
+        }
+    }
+]

@@ -1,6 +1,9 @@
 # Django settings for mytest project.
 import os
 
+# avoid be throttled when running on test server
+SHOULD_BE_THROTTLED = False
+
 import djcelery
 djcelery.setup_loader()
 
@@ -11,13 +14,13 @@ BROKER_PASSWORD = "test"
 BROKER_VHOST = "vpoluceno-desktop"
 BROKER_BACKEND="memory"
 
-CELERY_ALWAYS_EAGER = True
+#CELERY_ALWAYS_EAGER = True
 #CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
+# set CELERY_ALWAYS_EAGER=True before running tests
 TEST_RUNNER = 'djcelery.contrib.test_runner.run_tests' 
 
 PROJECT_DIR = os.path.dirname(__file__)
-from djcelery.tests.utils import unittest
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
