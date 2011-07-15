@@ -34,7 +34,9 @@ tests:
         - python manage.py celerycam --frequency=3.0 --settings=settings_tests
 
 production:
-    - #ADD
+    - install:
+        - sudo pip install dotcloud
+
     - #ADD
     - #ADD
     - #ADD
