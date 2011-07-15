@@ -1,5 +1,5 @@
 # Django settings for mytest project.
-import os
+import os, json
 
 # avoid be throttled when running on test server
 SHOULD_BE_THROTTLED = False
@@ -36,14 +36,17 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+envfilepath = os.path.join(os.environ['HOME'], 'environment.json')
+environment = json.load(open(envfilepath))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'rest_api',           # Or path to database file if using sqlite3.
-        'USER': 'tests',                      # Not used with sqlite3.
-        'PASSWORD': 'tests',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'template1',
+        'USER': environment['DOTCLOUD_DB_SQL_LOGIN'],
+        'PASSWORD': environment['DOTCLOUD_DB_SQL_PASSWORD'],
+        'HOST': environment['DOTCLOUD_DB_SQL_HOST'],
+        'PORT': environment['DOTCLOUD_DB_SQL_PORT'],
     }
 }
 
