@@ -149,7 +149,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'tastypie',
     'djcelery',
-    'gunicorn',
     'rest_api',
 )
 
